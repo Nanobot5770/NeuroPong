@@ -31,7 +31,7 @@ public class Logic : MonoBehaviour {
         //return new Vector2(Mathf.Round(v.x),
         //Mathf.Round(v.y));
         float x = v.x - anchor.position.x, y = v.y - anchor.position.y;
-        x -= 30; y -= 5;
+        x -= 5; y -= 5;
         //float x = Mathf.Round((v.x - anchor.position.x - 25) / realWidth);
         //float y = Mathf.Round((v.y - anchor.position.y) / realHeight);
         Vector2 v2 = new Vector2(Mathf.Round(x/10), Mathf.Round(y/10));
@@ -68,7 +68,7 @@ public class Logic : MonoBehaviour {
                 grid[x, y] = null;
 
                 // Update Block position
-                grid[x, y - 1].position += new Vector3(0, -1, 0);
+                grid[x, y - 1].position += new Vector3(0, -stepY, 0);
             }
         }
     }
