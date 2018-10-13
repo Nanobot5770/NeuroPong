@@ -30,10 +30,13 @@ public class Logic : MonoBehaviour {
     {
         //return new Vector2(Mathf.Round(v.x),
         //Mathf.Round(v.y));
-        float x = Mathf.Round((v.x - anchor.position.x - 25) / realWidth);
-        float y = Mathf.Round((v.y - anchor.position.y) / realHeight);
-        Debug.Log((v.x - anchor.position.x) + " " + (v.y - anchor.position.y) + " " + x + " " + y);
-        return new Vector2(x, y);
+        float x = v.x - anchor.position.x, y = v.y - anchor.position.y;
+        x -= 25;
+        //float x = Mathf.Round((v.x - anchor.position.x - 25) / realWidth);
+        //float y = Mathf.Round((v.y - anchor.position.y) / realHeight);
+        Vector2 v2 = new Vector2(Mathf.Round(x/10), Mathf.Round(y/20));
+        Debug.Log(v2);
+        return v2;
     }
 
 
