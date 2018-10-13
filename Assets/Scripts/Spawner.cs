@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour {
 
     public static Spawner Instance { get; private set; }
 
-	public Transform nextPiecePosition;
-	private GameObject nextPieceGraphic;
+    public Image nextPieceDisplay;
 	
     //public GameObject[] groups;
 
@@ -20,20 +20,36 @@ public class Spawner : MonoBehaviour {
     public GameObject pieceL;
     public GameObject pieceT;
 
-    public string nextPiece;
-    public int nextRotation;
-    public bool hasNextPiece;
+    [Header("Images")]
+    public Sprite imageS;
+    public Sprite imageZ;
+    public Sprite imageO;
+    public Sprite imageJ;
+    public Sprite imageI;
+    public Sprite imageL;
+    public Sprite imageT;
+
+    private struct PieceParameter
+    {
+        public string piece;
+        public int rotation;
+
+        public PieceParameter(string piece, int rotation)
+        {
+            this.piece = piece;
+            this.rotation = rotation;
+        }
+    }
+
+    Queue<PieceParameter> nextPieces;
 
     private bool waitForSpawner = false;
 
 	// Use this for initialization
 	void Start () {
+        nextPieces = new Queue<PieceParameter>();
+
         Instance = this;
-
-        nextPiece = "";
-        nextRotation = 0;
-
-        hasNextPiece = false;
         waitForSpawner = true;
 
         //SpawnNext();
@@ -41,15 +57,30 @@ public class Spawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(waitForSpawner && hasNextPiece)
+		if(waitForSpawner && nextPieces.Count > 0)
         {
             waitForSpawner = false;
             SpawnNextPiece();
         }
 	}
 
+    public void QueuePiece(string piece, int rotation)
+    {
+        nextPieces.Enqueue(new PieceParameter(piece, rotation));
+
+        if(waitForSpawner)
+        {
+            waitForSpawner = false;
+            SpawnNextPiece();
+        }
+        else if(nextPieces.Count == 1)
+        {
+            UpdateNextPiece();
+        }
+    }
+
     public void SpawnNext() {
-        if (hasNextPiece)
+        if (nextPieces.Count > 0)
         {
             SpawnNextPiece();
         }
@@ -72,51 +103,76 @@ public class Spawner : MonoBehaviour {
 	
 	public void UpdateNextPiece() 
 	{
-        nextPieceGraphic = Instantiate(GetNextPiece(),
-                    nextPiecePosition.position,
-                    Quaternion.identity,
-                   transform.parent);
+        PieceParameter parameter = nextPieces.Peek();
 
-        Destroy(nextPieceGraphic.GetComponent<Group>());
+        nextPieceDisplay.sprite = GetNextImage(parameter);
+    }
 
+    private Sprite GetNextImage(PieceParameter parameter)
+    {
+        if ("s".Equals(parameter.piece))
+        {
+            return imageS;
+        }
+        else if ("z".Equals(parameter.piece))
+        {
+            return imageZ;
+        }
+        else if ("j".Equals(parameter.piece))
+        {
+            return imageJ;
+        }
+        else if ("l".Equals(parameter.piece))
+        {
+            return imageL;
+        }
+        else if ("t".Equals(parameter.piece))
+        {
+            return imageT;
+        }
+        else if ("i".Equals(parameter.piece))
+        {
+            return imageI;
+        }
+        return imageO;
     }
 
     private void SpawnNextPiece()
     {
+        PieceParameter parameter = nextPieces.Dequeue();
+
         // Spawn Group at current Position
-        GameObject newObj = Instantiate(GetNextPiece(),
+        GameObject newObj = Instantiate(GetNextPiece(parameter),
                     transform.position,
                     Quaternion.identity,
                    transform.parent);
 
-        newObj.transform.Rotate(0, 0, nextRotation);
-
-        hasNextPiece = false;
+        newObj.transform.Rotate(0, 0, parameter.rotation);
     }
 
-    private GameObject GetNextPiece()
+    private GameObject GetNextPiece(PieceParameter parameter)
     {
-        if("s".Equals(nextPiece))
+        if("s".Equals(parameter.piece))
         {
             return pieceS;
         }
-        else if("z".Equals(nextPiece))
+        else if("z".Equals(parameter.piece))
         {
             return pieceZ;
         }
-        else if ("j".Equals(nextPiece))
+        else if ("j".Equals(parameter.piece))
         {
             return pieceJ;
         }
-        else if ("l".Equals(nextPiece))
+        else if ("l".Equals(parameter.piece))
         {
             return pieceL;
         }
-        else if ("t".Equals(nextPiece))
+        else if ("t".Equals(parameter.piece))
         {
             return pieceT;
         }
-        else if ("i".Equals(nextPiece))
+        else if ("i".Equals(parameter.piece))
         {
             return pieceI;
         }

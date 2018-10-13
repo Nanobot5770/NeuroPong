@@ -53,9 +53,7 @@ public class TetrisBciInterface : MonoBehaviour
     [Button]
     public void GenerateRandomPiece()
     {
-        Spawner.Instance.nextPiece = letters[UnityEngine.Random.Range(0, letters.Length)];
-        Spawner.Instance.nextRotation = rotations[UnityEngine.Random.Range(0, rotations.Length)];
-        Spawner.Instance.hasNextPiece = true;		
+        Spawner.Instance.QueuePiece(letters[UnityEngine.Random.Range(0, letters.Length)], rotations[UnityEngine.Random.Range(0, rotations.Length)]);
 		Spawner.Instance.UpdateNextPiece();
     }
 
@@ -74,9 +72,7 @@ public class TetrisBciInterface : MonoBehaviour
 
     public void SetNextPiece(String piece, int rotation)
     {
-        Spawner.Instance.nextPiece = piece;
-        Spawner.Instance.nextRotation = rotation;
-        Spawner.Instance.hasNextPiece = true;
+        Spawner.Instance.QueuePiece(piece, rotation);
         Spawner.Instance.UpdateNextPiece();
         //spawner.SpawnNext();
         Debug.Log(string.Format("Next Piece {0} @ Angle {1}", piece, rotation));
