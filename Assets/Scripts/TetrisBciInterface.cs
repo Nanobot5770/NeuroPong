@@ -55,7 +55,8 @@ public class TetrisBciInterface : MonoBehaviour
     {
         Spawner.Instance.nextPiece = letters[UnityEngine.Random.Range(0, letters.Length)];
         Spawner.Instance.nextRotation = rotations[UnityEngine.Random.Range(0, rotations.Length)];
-        Spawner.Instance.hasNextPiece = true;
+        Spawner.Instance.hasNextPiece = true;		
+		Spawner.Instance.UpdateNextPiece();
     }
 
     public void OnCommandReceived(string cmd)
@@ -76,6 +77,7 @@ public class TetrisBciInterface : MonoBehaviour
         Spawner.Instance.nextPiece = piece;
         Spawner.Instance.nextRotation = rotation;
         Spawner.Instance.hasNextPiece = true;
+        Spawner.Instance.UpdateNextPiece();
         //spawner.SpawnNext();
         Debug.Log(string.Format("Next Piece {0} @ Angle {1}", piece, rotation));
     }
