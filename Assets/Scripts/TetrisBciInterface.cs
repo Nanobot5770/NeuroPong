@@ -49,8 +49,20 @@ public class TetrisBciInterface : MonoBehaviour
 
     public void OnCommandReceived(string cmd)
     {
-        // TODO Interconnected to tetris
-        Debug.Log("Received " + cmd);
+        String[] values = cmd.Split('_');
+
+        if(values.Length == 2)
+        {
+            String piece = values[0].ToLower();
+            int rotation = int.Parse(values[1]);
+
+            SetNextPiece(piece, rotation);
+        }
+    }
+
+    public void SetNextPiece(String piece, int rotation)
+    {
+        Debug.Log(string.Format("Next Piece {0} @ Angle {1}", piece, rotation));
     }
 
     static void ListenToBCI()
