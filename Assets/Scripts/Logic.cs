@@ -20,6 +20,10 @@ public class Logic : MonoBehaviour {
     public Text scoreText;
     private int score = 0;
 
+    public AudioSource rcSound;
+
+    public GameObject gameOver;
+
     // Use this for initialization
     void Start () {
         Instance = this;
@@ -59,6 +63,7 @@ public class Logic : MonoBehaviour {
             Destroy(grid[x, y].gameObject);
             grid[x, y] = null;
         }
+        rcSound.Play();
     }
 
 
@@ -106,5 +111,9 @@ public class Logic : MonoBehaviour {
                 scoreText.text = "Score:\n" + score.ToString();
             }
         }
+    }
+
+    public void GameOver() {
+        gameOver.SetActive(true);
     }
 }

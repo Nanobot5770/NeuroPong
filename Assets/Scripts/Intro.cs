@@ -19,9 +19,7 @@ public class Intro : MonoBehaviour {
 
     private void Update()
     {
-        Debug.Log(Time.time - startTime);
         if(Time.time - startTime > 12) {
-            Debug.Log("blabla");
             instructions.Play();
         }
     }

@@ -8,16 +8,19 @@ public class Group : MonoBehaviour {
     float lastFall = 0;
 
     Logic logic;
+    AudioSource move;
 
     private bool waitForSpawner = false;
 
     // Use this for initialization
     void Start () {
         logic = Logic.Instance;
+        move = MoveSound.Instance;
 
         if (!isValidGridPos())
         {
-            Debug.Log("GAME OVER");
+            logic.GameOver();
+            //Debug.Log("GAME OVER");
             Destroy(gameObject);
         }
     }
@@ -25,6 +28,12 @@ public class Group : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        // TO REMOVE
+        if(Input.GetKeyDown(KeyCode.G)) {
+            logic.GameOver();
+            Destroy(gameObject);
+        }
+
         // Move Left
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -64,7 +73,7 @@ public class Group : MonoBehaviour {
                 //// It's not valid. revert.
                 //transform.Rotate(0, 0, 90);
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - lastFall >= 1)
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - lastFall >= .25)
         {
             // Modify position
             transform.position += new Vector3(0, -Logic.stepY, 0);
@@ -90,6 +99,7 @@ public class Group : MonoBehaviour {
             }
 
             lastFall = Time.time;
+            move.Play();
         }
     }
 
