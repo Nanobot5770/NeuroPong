@@ -54,17 +54,17 @@ public class Group : MonoBehaviour {
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            transform.Rotate(0, 0, -90);
+            //transform.Rotate(0, 0, -90);
 
-            // See if valid
-            if (isValidGridPos())
-                // It's valid. Update grid.
-                updateGrid();
-            else
-                // It's not valid. revert.
-                transform.Rotate(0, 0, 90);
+            //// See if valid
+            //if (isValidGridPos())
+            //    // It's valid. Update grid.
+            //    updateGrid();
+            //else
+                //// It's not valid. revert.
+                //transform.Rotate(0, 0, 90);
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - lastFall >= .25)
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - lastFall >= 1)
         {
             // Modify position
             transform.position += new Vector3(0, -Logic.stepY, 0);
