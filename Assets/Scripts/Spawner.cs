@@ -6,8 +6,12 @@ public class Spawner : MonoBehaviour {
 
     public static Spawner Instance { get; private set; }
 
+	public Transform nextPiecePosition;
+	private GameObject nextPieceGraphic;
+	
     //public GameObject[] groups;
 
+    [Header("Prefabs")]
     public GameObject pieceS;
     public GameObject pieceZ;
     public GameObject pieceO;
@@ -64,6 +68,17 @@ public class Spawner : MonoBehaviour {
 
         i = Random.Range(0, rotations.Length);
         nextRotation = rotations[i];*/
+    }
+	
+	public void UpdateNextPiece() 
+	{
+        nextPieceGraphic = Instantiate(GetNextPiece(),
+                    nextPiecePosition.position,
+                    Quaternion.identity,
+                   transform.parent);
+
+        Destroy(nextPieceGraphic.GetComponent<Group>());
+
     }
 
     private void SpawnNextPiece()
