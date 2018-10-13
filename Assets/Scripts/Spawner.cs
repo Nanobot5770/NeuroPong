@@ -106,6 +106,7 @@ public class Spawner : MonoBehaviour {
         PieceParameter parameter = nextPieces.Peek();
 
         nextPieceDisplay.sprite = GetNextImage(parameter);
+        nextPieceDisplay.color = Color.white;
     }
 
     private Sprite GetNextImage(PieceParameter parameter)
@@ -148,6 +149,9 @@ public class Spawner : MonoBehaviour {
                    transform.parent);
 
         newObj.transform.Rotate(0, 0, parameter.rotation);
+
+        nextPieceDisplay.color = new Color(0,0,0,0);
+        if(nextPieces.Count > 0) { UpdateNextPiece(); }
     }
 
     private GameObject GetNextPiece(PieceParameter parameter)

@@ -13,7 +13,6 @@ public class Group : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Debug.Log("blabla");
         logic = Logic.Instance;
 
         if (!isValidGridPos())
