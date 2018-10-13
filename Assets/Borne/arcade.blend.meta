@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 4dd22871dc78a9b49a0065e627ac3371
 ModelImporter:
-  serializedVersion: 23
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     100002: base
@@ -13,6 +13,7 @@ ModelImporter:
     100014: Plane_004
     100016: Sphere
     100018: Text
+    100020: Plane_005
     400000: //RootNode
     400002: base
     400004: Cube
@@ -23,6 +24,7 @@ ModelImporter:
     400014: Plane_004
     400016: Sphere
     400018: Text
+    400020: Plane_005
     2300000: base
     2300002: Cube
     2300004: Plane
@@ -32,6 +34,7 @@ ModelImporter:
     2300012: Plane_004
     2300014: Sphere
     2300016: Text
+    2300018: Plane_005
     3300000: base
     3300002: Cube
     3300004: Plane
@@ -41,6 +44,7 @@ ModelImporter:
     3300012: Plane_004
     3300014: Sphere
     3300016: Text
+    3300018: Plane_005
     4300000: Cube
     4300002: Sphere
     4300004: Plane_004
@@ -50,10 +54,41 @@ ModelImporter:
     4300012: Plane
     4300014: Plane_001
     4300016: base
+    4300018: Plane_005
     7400000: Default Take
     9500000: //RootNode
     2186277476908879412: ImportLogs
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Borne
+    second: {fileID: 2100000, guid: e5c0cf66c95341340a8fc79bce94b41d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TVBack
+    second: {fileID: 2100000, guid: eae85ffe26d485645b00943f65d849ae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Text
+    second: {fileID: 2100000, guid: 1f2ed78799b63da478d17ab73f65448c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: base__base_jpg
+    second: {fileID: 2100000, guid: 48e1aa062d1ebdb4589efa3afbc00c79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tvscrrreeen__Untitled
+    second: {fileID: 2100000, guid: 7ec375812e04b6247a82b1fec63fdab6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: unnamed
+    second: {fileID: 2100000, guid: c1be6a9a05ce0a949b40b2cada586dc8, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -104,8 +139,6 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
