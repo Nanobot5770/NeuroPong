@@ -7,9 +7,13 @@ public class Group : MonoBehaviour {
     // Time since last gravity tick
     float lastFall = 0;
 
+    Logic logic;
 
     // Use this for initialization
     void Start () {
+        Debug.Log("blabla");
+        logic = Logic.Instance;
+
         if (!isValidGridPos())
         {
             Debug.Log("GAME OVER");
@@ -24,7 +28,7 @@ public class Group : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             // Modify position
-            transform.position += new Vector3(-Grid.stepX, 0, 0);
+            transform.position += new Vector3(-Logic.stepX, 0, 0);
 
             // See if valid
             if (isValidGridPos())
@@ -32,12 +36,12 @@ public class Group : MonoBehaviour {
                 updateGrid();
             else
                 // Its not valid. revert.
-                transform.position += new Vector3(Grid.stepX, 0, 0);
+                transform.position += new Vector3(Logic.stepX, 0, 0);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             // Modify position
-            transform.position += new Vector3(Grid.stepX, 0, 0);
+            transform.position += new Vector3(Logic.stepX, 0, 0);
 
             // See if valid
             if (isValidGridPos())
@@ -45,7 +49,7 @@ public class Group : MonoBehaviour {
                 updateGrid();
             else
                 // It's not valid. revert.
-                transform.position += new Vector3(-Grid.stepX, 0, 0);
+                transform.position += new Vector3(-Logic.stepX, 0, 0);
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -59,10 +63,10 @@ public class Group : MonoBehaviour {
                 // It's not valid. revert.
                 transform.Rotate(0, 0, 90);
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - lastFall >= 1)
         {
             // Modify position
-            transform.position += new Vector3(0, -Grid.stepY, 0);
+            transform.position += new Vector3(0, -Logic.stepY, 0);
 
             // See if valid
             if (isValidGridPos())
@@ -73,10 +77,10 @@ public class Group : MonoBehaviour {
             else
             {
                 // It's not valid. revert.
-                transform.position += new Vector3(0, Grid.stepY, 0);
+                transform.position += new Vector3(0, Logic.stepY, 0);
 
                 // Clear filled horizontal lines
-                Grid.deleteFullRows();
+                logic.deleteFullRows();
 
                 // Spawn next Group
                 FindObjectOfType<Spawner>().SpawnNext();
@@ -96,15 +100,17 @@ public class Group : MonoBehaviour {
         {
             // need to unit out of real position
             //Vector2 v = Grid.roundVec2(child.position);
-            Vector2 v = Grid.roundVec2(child.position);
+            //Debug.Log(child.position);
+            Vector2 v = logic.roundVec2(child.position);
+            //Debug.Log(v);
 
             // Not inside Border?
-            if (!Grid.insideBorder(v))
+            if (!logic.insideBorder(v))
                 return false;
 
             // Block in grid cell (and not part of same group)?
-            if (Grid.grid[(int)v.x, (int)v.y] != null &&
-                Grid.grid[(int)v.x, (int)v.y].parent != transform)
+            if (Logic.grid[(int)v.x, (int)v.y] != null &&
+                Logic.grid[(int)v.x, (int)v.y].parent != transform)
                 return false;
         }
         return true;
@@ -114,17 +120,17 @@ public class Group : MonoBehaviour {
     void updateGrid()
     {
         // Remove old children from grid
-        for (int y = 0; y < Grid.h; ++y)
-            for (int x = 0; x < Grid.w; ++x)
-                if (Grid.grid[x, y] != null)
-                    if (Grid.grid[x, y].parent == transform)
-                        Grid.grid[x, y] = null;
+        for (int y = 0; y < Logic.h; ++y)
+            for (int x = 0; x < Logic.w; ++x)
+                if (Logic.grid[x, y] != null)
+                    if (Logic.grid[x, y].parent == transform)
+                        Logic.grid[x, y] = null;
 
         // Add new children to grid
         foreach (Transform child in transform)
         {
-            Vector2 v = Grid.roundVec2(child.position);
-            Grid.grid[(int)v.x, (int)v.y] = child;
+            Vector2 v = logic.roundVec2(child.position);
+            Logic.grid[(int)v.x, (int)v.y] = child;
         }
     }
 }

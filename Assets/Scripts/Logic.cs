@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grid : MonoBehaviour {
+public class Logic : MonoBehaviour {
+
+    public static Logic Instance;
 
     // The Grid itself
     public static int w = 10;
     public static int h = 20;
     public static Transform[,] grid = new Transform[w, h];
 
-    public static int realWidth = 100, realHeight = 200;
-    public static float stepX = Mathf.Round(Grid.realWidth / 10), stepY = Mathf.Round(Grid.realHeight / 20);
+    public static float realWidth = 100f, realHeight = 200f;
+    public static float stepX = Mathf.Round(realWidth / 10), stepY = Mathf.Round(realHeight / 20);
+
+    public Transform anchor;
 
     // Use this for initialization
     void Start () {
-		
+        Instance = this;
 	}
 	
 	// Update is called once per frame
@@ -22,23 +26,25 @@ public class Grid : MonoBehaviour {
 		
 	}
 
-    public static Vector2 roundVec2(Vector2 v)
+    public Vector2 roundVec2(Vector2 v)
     {
         //return new Vector2(Mathf.Round(v.x),
         //Mathf.Round(v.y));
-        return new Vector2(Mathf.Round(v.x/realWidth),
-                           Mathf.Round(v.y/realHeight));
+        float x = Mathf.Round((v.x - anchor.position.x - 25) / realWidth);
+        float y = Mathf.Round((v.y - anchor.position.y) / realHeight);
+        Debug.Log((v.x - anchor.position.x) + " " + (v.y - anchor.position.y) + " " + x + " " + y);
+        return new Vector2(x, y);
     }
 
 
-    public static bool insideBorder(Vector2 pos)
+    public bool insideBorder(Vector2 pos)
     {
         return ((int)pos.x >= 0 &&
                 (int)pos.x < w &&
                 (int)pos.y >= 0);
     }
 
-    public static void deleteRow(int y)
+    public void deleteRow(int y)
     {
         for (int x = 0; x < w; ++x)
         {
@@ -48,7 +54,7 @@ public class Grid : MonoBehaviour {
     }
 
 
-    public static void decreaseRow(int y)
+    public void decreaseRow(int y)
     {
         for (int x = 0; x < w; ++x)
         {
@@ -64,13 +70,13 @@ public class Grid : MonoBehaviour {
         }
     }
 
-    public static void decreaseRowsAbove(int y)
+    public void decreaseRowsAbove(int y)
     {
         for (int i = y; i < h; ++i)
             decreaseRow(i);
     }
 
-    public static bool isRowFull(int y)
+    public bool isRowFull(int y)
     {
         for (int x = 0; x < w; ++x)
             if (grid[x, y] == null)
@@ -78,7 +84,7 @@ public class Grid : MonoBehaviour {
         return true;
     }
 
-    public static void deleteFullRows()
+    public void deleteFullRows()
     {
         for (int y = 0; y < h; ++y)
         {
