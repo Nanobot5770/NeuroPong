@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Logic : MonoBehaviour {
 
@@ -16,10 +17,14 @@ public class Logic : MonoBehaviour {
 
     public Transform anchor;
 
+    public Text scoreText;
+    private int score = 0;
+
     // Use this for initialization
     void Start () {
         Instance = this;
-	}
+        scoreText.text = "Score:\n" + score.ToString();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -96,6 +101,9 @@ public class Logic : MonoBehaviour {
                 deleteRow(y);
                 decreaseRowsAbove(y + 1);
                 --y;
+
+                score += Random.Range(100, 500);
+                scoreText.text = "Score:\n" + score.ToString();
             }
         }
     }
