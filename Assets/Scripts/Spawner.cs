@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour {
 		
 	}
 
-    void SpawnNext() {
+    public void SpawnNext() {
         // Random Index
         int i = Random.Range(0, groups.Length);
 
