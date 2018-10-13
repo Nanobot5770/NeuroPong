@@ -2139,6 +2139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1147672667}
   - component: {fileID: 1147672666}
+  - component: {fileID: 1147672668}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -2196,6 +2197,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 1.3610001, y: 29.393002, z: 0}
+--- !u!111 &1147672668
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1147672665}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 3b235e34609c94199a6c05ca931a67bb, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 3b235e34609c94199a6c05ca931a67bb, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1242322581
 GameObject:
   m_ObjectHideFlags: 0
