@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyButtons;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +11,8 @@ using UnityEngine;
 
 public class TetrisBciInterface : MonoBehaviour
 {
+    private static string[] letters = new string[] { "s", "j", "z", "o", "t", "i", "l" };
+    private static int[] rotations = new int[] { 0, 90, 180, 270 };
 
     public int port = 1000;
 
@@ -47,6 +50,14 @@ public class TetrisBciInterface : MonoBehaviour
         }
     }
 
+    [Button]
+    public void GenerateRandomPiece()
+    {
+        Spawner.Instance.nextPiece = letters[UnityEngine.Random.Range(0, letters.Length)];
+        Spawner.Instance.nextRotation = rotations[UnityEngine.Random.Range(0, rotations.Length)];
+        Spawner.Instance.hasNextPiece = true;
+    }
+
     public void OnCommandReceived(string cmd)
     {
         String[] values = cmd.Split('_');
@@ -62,6 +73,10 @@ public class TetrisBciInterface : MonoBehaviour
 
     public void SetNextPiece(String piece, int rotation)
     {
+        Spawner.Instance.nextPiece = piece;
+        Spawner.Instance.nextRotation = rotation;
+        Spawner.Instance.hasNextPiece = true;
+        //spawner.SpawnNext();
         Debug.Log(string.Format("Next Piece {0} @ Angle {1}", piece, rotation));
     }
 

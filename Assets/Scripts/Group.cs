@@ -9,6 +9,8 @@ public class Group : MonoBehaviour {
 
     Logic logic;
 
+    private bool waitForSpawner = false;
+
     // Use this for initialization
     void Start () {
         Debug.Log("blabla");
@@ -82,8 +84,7 @@ public class Group : MonoBehaviour {
                 // Clear filled horizontal lines
                 logic.deleteFullRows();
 
-                // Spawn next Group
-                FindObjectOfType<Spawner>().SpawnNext();
+                Spawner.Instance.SpawnNext();
 
                 // Disable script
                 enabled = false;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -435,6 +435,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &651271678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 651271680}
+  - component: {fileID: 651271679}
+  m_Layer: 0
+  m_Name: BCI Connection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &651271679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 651271678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e96837cfaffd4454ba1acb68fede7b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  port: 1200
+  ActivateCommunication: 1
+--- !u!4 &651271680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 651271678}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &797824030
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,14 +591,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 805d52f42215240a4a921ef510c35d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groups:
-  - {fileID: 1613559946524694, guid: 369b443e90cae4c2786d670ca663ffbe, type: 2}
-  - {fileID: 1285312710153194, guid: 27b9f1a49e0b64683851569ac0c67a8e, type: 2}
-  - {fileID: 1879006284055228, guid: 0f309c22e7d2349f69d97fd53c951aee, type: 2}
-  - {fileID: 1639001220649146, guid: f7d4223c9c19d4f8cab8caad1bfb2bf8, type: 2}
-  - {fileID: 1738294771876936, guid: f5600af2c88db40d58b17b43a9a88174, type: 2}
-  - {fileID: 1297492191414052, guid: 4d54f9d5e04ae4178828cbfd36c3e8ce, type: 2}
-  - {fileID: 1418947579280830, guid: df5d8ea06d754489d8bba520a2eeda7d, type: 2}
+  pieceS: {fileID: 1738294771876936, guid: f5600af2c88db40d58b17b43a9a88174, type: 2}
+  pieceZ: {fileID: 1418947579280830, guid: df5d8ea06d754489d8bba520a2eeda7d, type: 2}
+  pieceO: {fileID: 1639001220649146, guid: f7d4223c9c19d4f8cab8caad1bfb2bf8, type: 2}
+  pieceJ: {fileID: 1285312710153194, guid: 27b9f1a49e0b64683851569ac0c67a8e, type: 2}
+  pieceI: {fileID: 1613559946524694, guid: 369b443e90cae4c2786d670ca663ffbe, type: 2}
+  pieceL: {fileID: 1879006284055228, guid: 0f309c22e7d2349f69d97fd53c951aee, type: 2}
+  pieceT: {fileID: 1297492191414052, guid: 4d54f9d5e04ae4178828cbfd36c3e8ce, type: 2}
+  nextPiece: 
+  nextRotation: 0
+  hasNextPiece: 0
 --- !u!1 &1453872892
 GameObject:
   m_ObjectHideFlags: 0
