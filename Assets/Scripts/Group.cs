@@ -139,8 +139,12 @@ public class Group : MonoBehaviour {
         // Add new children to grid
         foreach (Transform child in transform)
         {
+            Debug.Log(child.gameObject);
             Vector2 v = logic.roundVec2(child.position);
             Logic.grid[(int)v.x, (int)v.y] = child;
         }
+
+        // TO REMOVE
+        //DebugMatrix.UpdateMatrix(Logic.grid);
     }
 }
