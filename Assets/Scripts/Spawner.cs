@@ -7,8 +7,9 @@ public class Spawner : MonoBehaviour {
 
     public static Spawner Instance { get; private set; }
 
-    public Image nextPieceDisplay;
-	
+    public Image nextPieceDisplay, npd2, npd3;
+    //public Image npd2, npd3; // show also the next two pieces to come
+
     //public GameObject[] groups;
 
     [Header("Prefabs")]
@@ -54,7 +55,7 @@ public class Spawner : MonoBehaviour {
 
         //SpawnNext();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if(waitForSpawner && nextPieces.Count > 0)
@@ -75,7 +76,7 @@ public class Spawner : MonoBehaviour {
         }
         else if(nextPieces.Count == 1)
         {
-            UpdateNextPiece();
+            UpdateNextPieces();
         }
     }
 
@@ -88,11 +89,11 @@ public class Spawner : MonoBehaviour {
         {
             waitForSpawner = true;
         }
-        
+
         // Random Index
         //int i = Random.Range(0, groups.Length);
 
-        
+
 
         /*int i = Random.Range(0, letters.Length);
         nextPiece = letters[i];
@@ -100,13 +101,31 @@ public class Spawner : MonoBehaviour {
         i = Random.Range(0, rotations.Length);
         nextRotation = rotations[i];*/
     }
-	
-	public void UpdateNextPiece() 
-	{
-        PieceParameter parameter = nextPieces.Peek();
 
-        nextPieceDisplay.sprite = GetNextImage(parameter);
-        nextPieceDisplay.color = Color.white;
+	// public void UpdateNextPiece()
+	// {
+  //       PieceParameter parameter = nextPieces.Peek();
+  //
+  //       nextPieceDisplay.sprite = GetNextImage(parameter);
+  //       nextPieceDisplay.color = Color.white;
+  //   }
+
+    public void UpdateNextPieces()
+    {
+        PieceParameter[] np = nextPieces.ToArray();
+        Image[] holders = new Image[3]{ nextPieceDisplay, npd2, npd3 };
+        // PieceParameter[3] np = new PieceParameter[3];
+
+        for (int imgId = 0; imgId < 3; imgId++) {
+            if (np.Length <= imgId) { holders[imgId].color = new Color(0,0,0,0); continue; }
+            holders[imgId].sprite = GetNextImage(np[imgId]);
+            holders[imgId].color = Color.white;
+        }
+
+        //PieceParameter parameter = nextPieces.Peek();
+
+        //nextPieceDisplay.sprite = GetNextImage(parameter);
+        //nextPieceDisplay.color = Color.white;
     }
 
     private Sprite GetNextImage(PieceParameter parameter)
@@ -151,7 +170,7 @@ public class Spawner : MonoBehaviour {
         newObj.transform.Rotate(0, 0, parameter.rotation);
 
         nextPieceDisplay.color = new Color(0,0,0,0);
-        if(nextPieces.Count > 0) { UpdateNextPiece(); }
+        if(nextPieces.Count > 0) { UpdateNextPieces(); }
     }
 
     private GameObject GetNextPiece(PieceParameter parameter)
